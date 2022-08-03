@@ -1,0 +1,132 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Front Page {% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <div class=" hero-body">
+        <div class="container">
+            <section class="section">
+                <div class="columns">
+                    <div class="column is-8 is-offset-2">
+                        <div class="content is-medium">
+                            {% if post.image %}
+                            <figure class="image mb-6">
+                                <img src="{{ post.image.url }} " alt="">
+                            </figure>
+                            {% endif %}
+                            <h2 class="subtitle is-4">
+                                {{ post.created_at | date:'M-d-Y' }}
+                            </h2>
+                            <h2 class="title">
+                                {{ post.title }}
+                            </h2>
+
+                            <p>
+                                {{ post.intro }}
+                            </p>
+
+                            <p>
+                                {{ post.body }}
+                            </p>
+
+                            <p><small>Category: <a href="{% url 'category' post.category.slug %}">
+                                        {{ post.category }}</a></small></p>
+                        </div>
+                        <hr>
+                        <form action="" class="mt-6" method="post">
+                            {% csrf_token %}
+                            <div class="field">
+                                <label class="label mt-4" for="{{ form.name.id_for_label }}"> {{ form.name.label }}
+                                </label>
+                                <div class="control">
+
+                                    {{ form.name }}
+
+                                    <small class="form-text text-muted">{{ form.name.help_text|safe }}</small>
+                                    {% if form.name.errors %}
+                                    <div class="alert alert-danger mt-2 " role="alert">
+                                        {{ form.name.errors }}
+
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <label class="label mt-4" for="{{ form.email.id_for_label }}"> {{ form.email.label }}
+                                </label>
+                                <div class="control">
+
+                                    {{ form.email }}
+
+                                    <small class="form-text text-muted">{{ form.email.help_text|safe }}</small>
+                                    {% if form.email.errors %}
+                                    <div class="alert alert-danger mt-2 " role="alert">
+                                        {{ form.email.errors }}
+
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <label class="label mt-4" for="{{ form.body.id_for_label }}"> {{ form.body.label }}
+                                </label>
+                                <div class="control">
+
+                                    {{ form.body }}
+
+                                    <small class="form-text text-muted">{{ form.body.help_text|safe }}</small>
+                                    {% if form.body.errors %}
+                                    <div class="alert alert-danger mt-2 " role="alert">
+                                        {{ form.body.errors }}
+
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="field">
+                                    <button class="button is-success mt-4">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        {% for comment in post.comments.all %}
+                        <article class="media box mt-6">
+                            <div class="media-content">
+                                <strong>
+                                    {{ comment.name }}
+                                </strong>
+                                <small>
+                                    {{ comment.created_at |timesince }} ago
+                                </small>
+                                <div>
+
+                                    {{ comment.body }}
+                                </div>
+                            </div>
+                        </article>
+                        {% empty %}
+
+                        <article class="media box mt-6">
+                            <p>
+                                There is no comments
+                            </p>
+                        </article>
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+{% endblock content %}
