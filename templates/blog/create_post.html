@@ -1,0 +1,137 @@
+{% extends "core/base.html" %}
+
+{% block title %} Sign IN {% endblock %}
+
+
+{% block content %}
+
+<div class="hero-body">
+        <div class="container">
+            <section class="section">
+                <div class="columns">
+                    <div class="column is-8 is-offset-2">
+                        <div class="content is-medium">
+                            
+                            <h2 class="subtitle is-4">Create Post</h2>
+
+                            <form method="post" class="mb-6" enctype="multipart/form-data">
+                                {% csrf_token %}
+
+                                <div class="field">
+                                    <label for="{{ form.category.id_for_label }}" class="label">
+                                        {{ form.category.label }}</label>
+
+                                    <div class="control">
+                                        {{ form.category }}
+                                    </div>
+                                    <small class="form-text text-muted">{{ form.category.help_text|safe }}</small>
+                                    {% if form.category.errors %}
+                                    <div class="alert alert-danger mt-2 " role="alert">
+                                        {{ form.category.errors }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="field">
+                                    <label for="{{ form.title.id_for_label }}" class="label">
+                                        {{ form.title.label }}</label>
+
+                                    <div class="control">
+                                        {{ form.title }}
+                                    </div>
+                                    <small class="form-text text-muted">{{ form.title.help_text|safe }}</small>
+                                    {% if form.title.errors %}
+                                    <div class="alert alert-danger mt-2 " role="alert">
+                                        {{ form.title.errors }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="field">
+                                    <label for="{{ form.intro.id_for_label }}" class="label">
+                                        {{ form.intro.label }}</label>
+
+                                    <div class="control">
+                                        {{ form.intro }}
+                                    </div>
+                                    <small class="form-text text-muted">{{ form.intro.help_text|safe }}</small>
+                                    {% if form.intro.errors %}
+                                    <div class="alert alert-danger mt-2 " role="alert">
+                                        {{ form.intro.errors }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="field">
+                                    <label for="{{ form.body.id_for_label }}" class="label">
+                                        {{ form.body.label }}</label>
+
+                                    <div class="control">
+                                        {{ form.body }}
+                                    </div>
+                                    <small class="form-text text-muted">{{ form.body.help_text|safe }}</small>
+                                    {% if form.body.errors %}
+                                    <div class="alert alert-danger mt-2 " role="alert">
+                                        {{ form.body.errors }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="field">
+                                    <label for="{{ form.status.id_for_label }}" class="label">
+                                        {{ form.status.label }}</label>
+
+                                    <div class="control">
+                                        {{ form.status }}
+                                    </div>
+                                    <small class="form-text text-muted">{{ form.status.help_text|safe }}</small>
+                                    {% if form.status.errors %}
+                                    <div class="alert alert-danger mt-2 " role="alert">
+                                        {{ form.status.errors }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="field">
+                                    <label for="{{ form.image.id_for_label }}" class="label">
+                                        {{ form.image.label }}</label>
+
+                                    <div class="control">
+                                        {{ form.image }}
+                                    </div>
+                                    <small class="form-text text-muted">{{ form.image.help_text|safe }}</small>
+                                    {% if form.image.errors %}
+                                    <div class="alert alert-danger mt-2 " role="alert">
+                                        {{ form.image.errors }}
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="field">
+                                    <div class="control">
+                                        <button class="button is-success">Submit Comment</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                            {% for message in messages %}
+                        <article class="message is-danger">
+                            <div class="message-header">
+                            </div>
+                            <div class="message-body">
+                                {{message}}
+                            </div>
+                            </article>
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+{% endblock content %}
+

@@ -10,7 +10,7 @@ class CommentsInline(admin.TabularInline):
 class CustomPostAdmin(admin.ModelAdmin):
     search_fields = ['title', 'intro', 'body']
 
-    list_display= ['title', 'slug', 'created_at']
+    list_display= ['title', 'slug','author', 'created_at']
 
     list_filter = ['title', 'slug']
 

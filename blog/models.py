@@ -1,5 +1,7 @@
 from django.db import models
+from django.utils.text import slugify
 
+from accounts.models import CustomUser
 # Create your models here.
 
 class CreateTime(models.Model):
@@ -32,9 +34,14 @@ class Post(CreateTime):
     status = models.CharField(max_length=256, choices=CHOICES, default=ACTIVE)
     image = models.ImageField(upload_to = 'uploads/', blank = True, null = True)
     category = models.ForeignKey(Category, on_delete= models.CASCADE, related_name='posts')
+    author = models.ForeignKey(CustomUser, on_delete= models.CASCADE, related_name='feeds')
 
     def __str__(self) -> str:
         return self.title
+    
+    def save(self,*args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Post, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ['-created_at']

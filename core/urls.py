@@ -24,5 +24,6 @@ from core_app.views import AboutPage
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('about/', AboutPage.as_view(), name='about'),
+    path('', include('accounts.urls')),
     path('', include('blog.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
