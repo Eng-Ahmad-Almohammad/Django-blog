@@ -25,6 +25,7 @@
                             {% endif %}
                             <h2 class="subtitle is-4">{{ post.created_at| date:'M-d-Y' }}</h2>
                                 <h1 class="title">{{ post.title }}</h1>
+                                <p><small>Author: {{ post.author }}</small></p>
                             <p>{{ post.intro }}</p>
                             </a>
                         </div>
